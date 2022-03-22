@@ -25,7 +25,7 @@ RUN apt -qq update && apt -qq upgrade -y \
 
 # Copy artifacts
 RUN wget ${SENDY_ZIP_LINK} -P /tmp
-COPY ./artifacts/* /tmp
+COPY ./artifacts/* /tmp/
 
 # Install Sendy
 RUN unzip /tmp/sendy.zip -d /tmp \
