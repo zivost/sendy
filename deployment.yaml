@@ -44,7 +44,10 @@ spec:
           - name: "SENDY_PROTOCOL"
             value: "https"
           - name: "SENDY_FQDN"
-            value: "sendy.zivost.com"
+            valueFrom:
+              secretKeyRef:
+                name: sendy-environment
+                key: fqdn
           - name: "MYSQL_DATABASE"
             value: "sendy"
           - name: "MYSQL_HOST"
