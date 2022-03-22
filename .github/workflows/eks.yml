@@ -43,7 +43,7 @@ jobs:
           BRANCH: ${{ steps.extract_branch.outputs.branch }}
           FCM_ADMIN_KEY_JSON: ${{ secrets.FCM_ADMIN_KEY_JSON }}
         run: |
-          docker build --build-arg SENDY_ZIP_LINK=${{env.SENDY_ZIP_LINK}} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --build-arg SENDY_ZIP_LINK=${{secrets.SENDY_ZIP_LINK}} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       - name: Fill the deployment variables
