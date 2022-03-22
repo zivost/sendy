@@ -12,10 +12,7 @@
 
 FROM php:7.4.8-apache as sendy
 
-ARG SENDY_VER=5.2.3
-ARG ARTIFACT_DIR=5.2.3
-
-ENV SENDY_VERSION ${SENDY_VER}
+ARG SENDY_ZIP_LINK="https://zivost-host.s3.amazonaws.com/sendy.zip"
 
 RUN apt -qq update && apt -qq upgrade -y \
   # Install unzip cron
@@ -27,10 +24,11 @@ RUN apt -qq update && apt -qq upgrade -y \
   && apt autoremove -y 
 
 # Copy artifacts
-COPY ./artifacts/${ARTIFACT_DIR}/ /tmp
+RUN wget ${SENDY_ZIP_LINK} -P /tmp
+COPY ./artifacts/* /tmp
 
 # Install Sendy
-RUN unzip /tmp/sendy-${SENDY_VER}.zip -d /tmp \
+RUN unzip /tmp/sendy.zip -d /tmp \
   && cp -r /tmp/includes/* /tmp/sendy/includes \
   && mkdir -p /tmp/sendy/uploads/csvs \
   && chmod -R 777 /tmp/sendy/uploads \
