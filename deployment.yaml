@@ -98,7 +98,7 @@ metadata:
 spec:
   secretName: $BRANCH_NAME-sendy
   issuerRef:
-    name: letsencrypt-provider-production
+    name: general-issuer
     kind: ClusterIssuer
   commonName: "sendy.zivost.com"
   dnsNames:
